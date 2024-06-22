@@ -23,9 +23,7 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String Home(Model m) {
-		System.out.println("here we are");
 		List<Product> products = productDao.getProducts();
-		System.out.println(products.size());
 		m.addAttribute("products", products);
 		return "index";
 	}
@@ -65,5 +63,12 @@ public class MainController {
 		RedirectView redirectView = new RedirectView();
 		redirectView.setUrl(request.getContextPath() + "/");
 		return redirectView;
+	}
+
+	@RequestMapping("/update/{productId}")
+	public String UpdateForm(@PathVariable("productId") int productId, Model model) {
+		Product product = productDao.getProduct(productId);
+		model.addAttribute("product", product);
+		return "update_form";
 	}
 }

@@ -19,14 +19,7 @@ public class ProductDao {
 	@Transactional
 	public void createProduct(Product product) {
 		try {
-			System.out.println("Product Id : " + product.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error in product Id : " + e.getMessage());
-		}
-
-		try {
-			this.hibernateTemplate.save(product);
+			this.hibernateTemplate.saveOrUpdate(product);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error saving product: " + e.getMessage());
